@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RC SWITCH SERVER</title>
+        <style>
+            body {
+                margin: 20px;
+                font-family: sans-serif;
+            }
+            .code {
+                font-family: monospace;
+            }
+            .indent {
+                margin-left: 20px;
+            }
+            .param {
+                margin-left: 40px;
+            }
+            .space-next-subheader {
+                margin-top: 20px;
+            }
+            .space-next-item {
+                margin-top: 60px;
+            }
+            .footer {
+                margin-top: 60px;
+                font-size: small;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>RC SWITCH SERVER</h1>
+
+        <h2>REST api</h2>
+        
+        <span class="code">POST /api/switches/{group}/{code}/{operation}</span>: turns a switch on or off
+        <div class="indent space-next-subheader">Parameters:</div>
+        <div class="param"><span class="code">{group}</span>: group switch group (as coded in the remote control), e.g. 11011</div>
+        <div class="param"><span class="code">{code}</span>: code of the socket, A=1, B=2, ...</div>
+        <div class="param"><span class="code">{operation}</span>: operation, allowed values: on, off</div>
+        <div class="indent space-next-subheader">Response:</div>
+        <div class="param"><span class="code">HTTP 204</span>: operation succeeded</div>
+        
+
+        <div class="space-next-item"><span class="code">GET /api/switches/log</span>: gets the log of the last 100 operations</div>
+        <div class="indent space-next-subheader">Parameters: none</div>
+        <div class="indent space-next-subheader">Response: Array of log entries, example:</div>
+        <div class="param"><pre>[
+  {
+    "timestamp": 1496392451754,
+    "serverMessage": "0:0:0:0:0:0:0:1 turned on switch 10111:1",
+    "caller": "0:0:0:0:0:0:0:1",
+    "group": "10111",
+    "switchNr": 1,
+    "position": true
+  },
+  {
+    "timestamp": 1496392451700,
+    "serverMessage": "0:0:0:0:0:0:0:1 turned of switch 10111:2",
+    "caller": "0:0:0:0:0:0:0:1",
+    "group": "10111",
+    "switchNr": 2,
+    "position": false
+  }
+]</pre></div>
+        <div class="param"><span class="code">HTTP 200</span>: operation succeeded</div>
+
+        <div class="footer">Copyright &copy; 2017 by Johannes Schneider</div>
+    </body>
+</html>
