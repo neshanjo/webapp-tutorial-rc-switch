@@ -34,12 +34,12 @@ public class GpioSwitchControl implements SwitchControl {
     }
     
     @Override
-    public void turnOn(String group, int switchId) {
+    public synchronized void turnOn(String group, int switchId) {
         transmitter.switchOn(RCSwitch.getSwitchGroupAddress(group), switchId);
     }
 
     @Override
-    public void turnOff(String group, int switchId) {
+    public synchronized void turnOff(String group, int switchId) {
         transmitter.switchOff(RCSwitch.getSwitchGroupAddress(group), switchId);
     }
     
