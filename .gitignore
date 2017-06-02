@@ -22,3 +22,5 @@
 hs_err_pid*
 /rc-switch-server/target/
 **/nb-configuration.xml
+/webapp-example-solution/solution1/
+/webapp-example-solution/password.txt
