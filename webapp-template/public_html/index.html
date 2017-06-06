@@ -43,27 +43,28 @@ License along with this program. If not, see &lt;http://www.gnu.org/licenses/>.
                     <div class="row">
                         <div class="col-sm-12">
                             <h1>Welcome</h1>
+                            Some dotted border is added in the following row to demonstrate the grid layout.
                         </div>
                     </div>
                     <div class="row vert-space-sm">
-                        <div class="col-sm-12 col-md-2">
+                        <div class="col-sm-12 col-md-2 with-border">
                             <p>Hello World!</p>
                         </div>
-                        <div class="col-sm-12 col-md-8">
+                        <div class="col-sm-12 col-md-8 with-border">
                             <p>
                                 There is some text in this column to demonstrate how it looks like when the text
                                 is wrapped. This text has no other meaning. So you don't need to read this all. Still
                                 reading? Sorry, but still no interesting content here.
                             </p>
                         </div>
-                        <div class="col-sm-12 col-md-2">
+                        <div class="col-sm-12 col-md-2 with-border">
                             <p><button id="clickme" type="button" class="btn btn-primary">Click!</button></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <h2>HTML Basic Elements</h2>
-                            <p>Some text in a paragraph.</p>
+                            <p>Some text in a paragraph. This is <strong>important</strong>, this is <em>emphasised</em>.</p>
                             <p><img src="http://via.placeholder.com/300x100&text=Example+Image" width="300" height="100" alt="Example Image"></p>
                             <p>A link to <a href="http://www.google.com">Google</a>.</p>
                             A shopping list:
@@ -78,7 +79,7 @@ License along with this program. If not, see &lt;http://www.gnu.org/licenses/>.
                                 <li>to shut down you PC when you leave</li>
                                 <li>to take all your belongings with you</li>
                             </ol>
-                            Some table:
+                            <h3>Some table</h3>
                             <table class="table"> 
                                 <thead>
                                     <tr>
@@ -111,8 +112,64 @@ License along with this program. If not, see &lt;http://www.gnu.org/licenses/>.
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Form Elements</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="Name" placeholder="Insert name here">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    Option one is this and that&mdash;be sure to include why it's great
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    Option two can be something else and selecting it will deselect option one
+                                </label>
+                            </div>
+                            <div class="radio disabled">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                                    Option three is disabled
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="choices">Choices</label>
+                                <select id="choices" class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="area">Comments</label>
+                                <textarea id="area" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <button id="hit-me" type="button" class="btn btn-success btn-lg">Hit me!</button>
+                        </div>
+                    </div>
+                </div> <!-- /panel-body -->
+            </div> <!-- /panel -->
 
         </div> <!-- /container -->
 

@@ -4,3 +4,10 @@ body {
 .vert-space-sm {
     margin-top: 20px;
 }
+
+.with-border {
+    
+    border-color: darkgray;
+    border-width: 1px;
+    border-style: dotted;
+}
