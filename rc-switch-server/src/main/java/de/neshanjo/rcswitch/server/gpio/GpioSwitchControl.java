@@ -16,8 +16,12 @@
  */
 package de.neshanjo.rcswitch.server.gpio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.wiringpi.GpioUtil;
+
 import de.pi3g.pi.rcswitch.RCSwitch;
 
 /**
@@ -26,11 +30,13 @@ import de.pi3g.pi.rcswitch.RCSwitch;
  */
 public class GpioSwitchControl implements SwitchControl {
     
+    private static final Logger LOG = LoggerFactory.getLogger(GpioSwitchControl.class);
     private final RCSwitch transmitter;
     
     public GpioSwitchControl() {
         GpioUtil.enableNonPrivilegedAccess();
         transmitter = new RCSwitch(RaspiPin.GPIO_00);
+        LOG.info("Initialized switch control.");
     }
     
     @Override

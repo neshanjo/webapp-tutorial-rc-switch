@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.neshanjo.rcswitch.server.data.LogEntry;
 
 /**
@@ -28,26 +31,28 @@ import de.neshanjo.rcswitch.server.data.LogEntry;
  */
 public class LogServiceImpl implements LogService {
     
+    private static final Logger LOG = LoggerFactory.getLogger(LogServiceImpl.class);
     private static final int WEAK_MAX_LOG_SIZE = 100;
     
-    private final ConcurrentLinkedQueue<LogEntry> log = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<LogEntry> logRepo = new ConcurrentLinkedQueue<>();
     
     @Override
     public void log(LogEntry entry) {
-        log.offer(entry);
+        LOG.debug(entry.getServerMessage());
+        logRepo.offer(entry);
     }
     
     @Override
     public List<LogEntry> getLog() {
-        final int currentSize = log.size();
+        final int currentSize = logRepo.size();
         for (int i = 0; i < currentSize - WEAK_MAX_LOG_SIZE; i++) {
             //if log size is more than WEAK_MAX_LOG_SIZE, remove entries
-            log.poll();
+            logRepo.poll();
         }
         //Note that the resulting list could still have more than WEAK_MAX_LOG_SIZE entries, if entries are added after 
         //currentSize has been determined (that's why it is called WEAL_...)
         
-        return new ArrayList<>(log);
+        return new ArrayList<>(logRepo);
     } 
     
 }

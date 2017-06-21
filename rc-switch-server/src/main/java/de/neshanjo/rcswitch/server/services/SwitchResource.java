@@ -16,6 +16,8 @@
  */
 package de.neshanjo.rcswitch.server.services;
 
+import java.util.regex.Pattern;
+
 import de.neshanjo.rcswitch.server.gpio.SwitchControl;
 
 import javax.inject.Inject;
@@ -24,6 +26,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -41,6 +44,8 @@ public class SwitchResource {
         on, off
     }
 
+    private static final Pattern GROUP_PATTERN = Pattern.compile("[01]{5}");
+    
     @Inject
     private SwitchControl switchControl;
     
@@ -62,6 +67,9 @@ public class SwitchResource {
             @PathParam("code") int code,
             @PathParam("operation") Operation operation,
             @Context HttpServletRequest request) {
+        if (!GROUP_PATTERN.matcher(group).matches()) {
+            throw new WebApplicationException("group must match pattern " + GROUP_PATTERN, Response.Status.BAD_REQUEST);
+        }
         if (operation == Operation.on) {
             switchControl.turnOn(group, code);
             logService.log(new LogEntry(System.currentTimeMillis(), String.format("%s turned on switch %s:%d", 
