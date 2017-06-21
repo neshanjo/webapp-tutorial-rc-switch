@@ -36,11 +36,12 @@
         
         <span class="code">POST /api/switches/{group}/{code}/{operation}</span>: turns a switch on or off
         <div class="indent space-next-subheader">Parameters:</div>
-        <div class="param"><span class="code">{group}</span>: group switch group (as coded in the remote control), e.g. 11011</div>
+        <div class="param"><span class="code">{group}</span>: 5-digit binary switch group (as coded in the remote control), e.g. 11011</div>
         <div class="param"><span class="code">{code}</span>: code of the socket, A=1, B=2, ...</div>
         <div class="param"><span class="code">{operation}</span>: operation, allowed values: on, off</div>
         <div class="indent space-next-subheader">Response:</div>
         <div class="param"><span class="code">HTTP 204</span>: operation succeeded</div>
+        <div class="param"><span class="code">HTTP 400</span>: bad argument</div>
         
 
         <div class="space-next-item"><span class="code">GET /api/switches/log</span>: gets the log of the last 100 operations</div>

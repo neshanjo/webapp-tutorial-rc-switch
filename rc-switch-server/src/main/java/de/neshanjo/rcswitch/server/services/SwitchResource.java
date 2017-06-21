@@ -26,7 +26,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -64,20 +63,22 @@ public class SwitchResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response turnSwitch(@PathParam("group") String group, 
-            @PathParam("code") int code,
-            @PathParam("operation") Operation operation,
+            @PathParam("code") String code,
+            @PathParam("operation") String operation,
             @Context HttpServletRequest request) {
         if (!GROUP_PATTERN.matcher(group).matches()) {
-            throw new WebApplicationException("group must match pattern " + GROUP_PATTERN, Response.Status.BAD_REQUEST);
+            throw new IllegalArgumentException("group must match pattern " + GROUP_PATTERN);
         }
-        if (operation == Operation.on) {
-            switchControl.turnOn(group, code);
+        final Operation operationEnum = Enum.valueOf(Operation.class, operation);
+        final int codeInt = Integer.valueOf(code);
+        if (operationEnum == Operation.on) {
+            switchControl.turnOn(group, codeInt);
             logService.log(new LogEntry(System.currentTimeMillis(), String.format("%s turned on switch %s:%d", 
-                    request.getRemoteAddr(), group, code), request.getRemoteAddr(), group, code, true));
+                    request.getRemoteAddr(), group, codeInt), request.getRemoteAddr(), group, codeInt, true));
         } else {
-            switchControl.turnOff(group, code);
+            switchControl.turnOff(group, codeInt);
             logService.log(new LogEntry(System.currentTimeMillis(), String.format("%s turned off switch %s:%d", 
-                    request.getRemoteAddr(), group, code), request.getRemoteAddr(), group, code, false));
+                    request.getRemoteAddr(), group, codeInt), request.getRemoteAddr(), group, codeInt, false));
         }
         return Response.noContent().status(Response.Status.NO_CONTENT).build();
     }

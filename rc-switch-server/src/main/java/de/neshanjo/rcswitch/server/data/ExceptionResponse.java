@@ -26,11 +26,13 @@ import lombok.Data;
 public class ExceptionResponse {
 
     private int code;
+    private String exception;
     private String errorMessage;
     private String detailedMessage;
 
     public ExceptionResponse(int code, Throwable ex) {
         this.code = code;
+        this.exception = ex.getClass().getSimpleName();
         this.errorMessage = ex.getMessage();
         this.detailedMessage = ex.getCause() == null ? "" : ex.getCause().getMessage();
     }
