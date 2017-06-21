@@ -43,6 +43,10 @@ License along with this program. If not, see &lt;http://www.gnu.org/licenses/>.
             <param-name>allowedMethods</param-name>
             <param-value>GET,POST,DELETE,PUT,HEAD,OPTIONS</param-value>
         </init-param>
+        <init-param>
+            <param-name>allowedTimingOrigins</param-name>
+            <param-value>*</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>cross-origin</filter-name>
